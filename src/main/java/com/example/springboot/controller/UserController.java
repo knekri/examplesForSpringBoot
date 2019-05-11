@@ -38,7 +38,7 @@ public class UserController {
         return userService.findById(id).get();
     }
 
-    @PutMapping
+    @PutMapping(path = {"/{id}"})
     public User update(@RequestBody User user){
         return userService.update(user);
     }
