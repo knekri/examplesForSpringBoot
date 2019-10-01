@@ -7,28 +7,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "user")
-@Setter @Getter @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @RequiredArgsConstructor
 public class User {
 	
 	    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name="id")
 	    private int id;
 	    
-	    @Column(name="first_name")
+	    @NonNull @Column(name="first_name")
 	    private String firstName;
 	    
-	    @Column(name="last_name")
+	    @NonNull @Column(name="last_name")
 	    private String lastName;
 	   
-	    @Column(name="email")
+	    @NonNull @Column(name="email")
 	    private String email;
 
 }
