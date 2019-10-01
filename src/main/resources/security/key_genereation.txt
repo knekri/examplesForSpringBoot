@@ -1,0 +1,3 @@
+.\keytool -genkey -alias keyAliasForSpringExampleProject -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keyStoreForExampleProject.p12 -validity 3650
+
+password: springboot
