@@ -21,13 +21,12 @@ public class User {
 	    @Column(name="id")
 	    private int id;
 	    
-	    @NonNull @Column(name="first_name")
-	    private String firstName;
-	    
-	    @NonNull @Column(name="last_name")
-	    private String lastName;
+	    @NonNull @Column(name = "name")
+	    private String userName;
 	   
-	    @NonNull @Column(name="email")
+	    @NonNull @Column(name= "email", nullable = false)
 	    private String email;
-
+	    
+	    @NonNull @Column(name = "password", nullable = false)
+    	private String password;
 }

@@ -49,8 +49,7 @@ public class ServiceClassImpl implements ServiceClass {
     	User originalUser = repository.getOne(user.getId());
     	
     	originalUser.setEmail(user.getEmail());
-    	originalUser.setFirstName(user.getFirstName());
-    	originalUser.setLastName(user.getLastName());
+    	originalUser.setUserName(user.getUserName());
     			
         return repository.save(originalUser);
     }
