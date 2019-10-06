@@ -1,12 +1,6 @@
 package com.example.springboot.security;
 
-import org.apache.catalina.Context;
-import org.apache.catalina.connector.Connector;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -51,7 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.POST, "/login").permitAll()
 //            .antMatchers("/api/public/management/*").hasRole("MANAGER")
 //            .antMatchers("/api/public/admin/*").hasRole("ADMIN")
-            .anyRequest().authenticated();
+//            .anyRequest().authenticated()
+            ;
     }
 
 
