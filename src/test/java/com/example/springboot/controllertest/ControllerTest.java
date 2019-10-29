@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -32,25 +35,30 @@ public class ControllerTest {
 
 
     // #1 Verifying HTTP Request Matching
+    @WithMockUser(username = "admin", password = "admin")
     @Test
     public void sendRequestAndTheExpectedStatusIsOK() throws Exception {
         mockMvc.perform(get("/api")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
     }
 
     // #2 Verifying Input Serialization
+//    @WithMockUser(username = "admin", password = "admin", roles = "USER") //or use the auth setup on mockMvc object
     @Test
     public void senValidInputAndTheExpectedStatusIsOK() throws Exception {
         User user = new User("joska", "pista", "joska@pista.hu");
 
-        mockMvc.perform(post("/api")
+        mockMvc.perform(post("/api").with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin"))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(objectMapper.writeValueAsString(user))) // The request body is generated using the ObjectMapper provided by Spring Boot,
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());                     // serializing a UserResource object to a JSON string.
     }
 
     // #3 Verifying Input Validation
+    @WithMockUser(username = "admin", password = "admin")
     @Test
     public void senInValidInputAndTheExpectedStatusBadRequest() throws Exception {
         User user = new User();
@@ -62,6 +70,7 @@ public class ControllerTest {
     }
 
     // #4 Verifying Business Logic Calls
+    @WithMockUser(username = "admin", password = "admin")
     @Test
     public void sendValidInputThenMapsToBusinessModel() throws Exception {
         User user = new User("joska", "pista", "joska@pista.hu");
@@ -79,6 +88,7 @@ public class ControllerTest {
     }
 
     // #5 Verifying Output Serialization
+    @WithMockUser(username = "admin", password = "admin")
     @Test
     public void sendValidInputThenReturnsAnUser() throws Exception {
 
@@ -120,6 +130,7 @@ public class ControllerTest {
 
 
     // #6 Verifying Exception Handling
+    @WithMockUser(username = "admin", password = "admin")
     @Test
     public void sendNullValueThenReturnsBadRequestAndErrorResult() throws Exception {
 
