@@ -10,18 +10,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @PropertySource("classpath:cors-mapping.properties")
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${origin.url:http://localhost:4200}")
-    private String originUrl;
-    @Value("${origin.maxage:3600}")
-    private int originMaxAge;
+  @Value("${origin.url:http://localhost:4200}")
+  private String originUrl;
+  @Value("${origin.maxage:3600}")
+  private int originMaxAge;
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
 
-        registry
-                .addMapping("/**")
-                .allowedOrigins(originUrl)
-                .maxAge(originMaxAge)
-                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
-    }
+    registry.addMapping("/**").allowedOrigins(originUrl).maxAge(originMaxAge).allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+  }
 }
