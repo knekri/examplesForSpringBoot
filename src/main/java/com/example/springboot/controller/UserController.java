@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.springboot.entities.User;
 import com.example.springboot.service.ServiceClass;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({"/api"})
 public class UserController {
 
-	ServiceClass userService;
+	private ServiceClass userService;
 
 	@Autowired
-	public UserController(ServiceClass service) {
-		this.userService = service;
+	public UserController(ServiceClass serviceClass) {
+		this.userService = serviceClass;
 	}
 	
     @PostMapping
