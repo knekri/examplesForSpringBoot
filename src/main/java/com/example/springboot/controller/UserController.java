@@ -16,32 +16,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/api"})
-public class UserController {
+public final class UserController {
 
   private ServiceClass userService;
 
   @Autowired
-  public UserController(ServiceClass serviceClass) {
+  public UserController(final ServiceClass serviceClass) {
     this.userService = serviceClass;
   }
 
   @PostMapping
-  public User create(@RequestBody User user) {
+  public User create(@RequestBody final User user) {
     return userService.create(user);
   }
 
   @GetMapping(path = {"/{id}"})
-  public User findOne(@PathVariable("id") int id) {
+  public User findOne(@PathVariable("id") final int id) {
     return userService.findById(id).get();
   }
 
   @PutMapping(path = {"/{id}"})
-  public User update(@RequestBody User user) {
+  public User update(@RequestBody final User user) {
     return userService.update(user);
   }
 
   @DeleteMapping(path = {"/{id}"})
-  public User delete(@PathVariable("id") int id) {
+  public User delete(@PathVariable("id") final int id) {
     return userService.delete(id);
   }
 

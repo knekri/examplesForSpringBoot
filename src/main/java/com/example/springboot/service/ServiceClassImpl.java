@@ -11,20 +11,20 @@ import java.util.Optional;
 @Service
 public class ServiceClassImpl implements ServiceClass {
 
-  private UserRepository repository;
+  private final UserRepository repository;
 
   @Autowired
-  public ServiceClassImpl(UserRepository repo) {
+  public ServiceClassImpl(final UserRepository repo) {
     this.repository = repo;
   }
 
   @Override
-  public User create(User user) {
+  public final User create(final User user) {
     return repository.save(user);
   }
 
   @Override
-  public User delete(int id) {
+  public final User delete(final int id) {
     Optional<User> user = findById(id);
     if (user != null) {
       repository.delete(user.get());
@@ -33,17 +33,17 @@ public class ServiceClassImpl implements ServiceClass {
   }
 
   @Override
-  public List<User> findAll() {
+  public final List<User> findAll() {
     return repository.findAll();
   }
 
   @Override
-  public Optional<User> findById(int id) {
+  public final Optional<User> findById(final int id) {
     return repository.findById(id);
   }
 
   @Override
-  public User update(User user) {
+  public final User update(final User user) {
 
     User originalUser = repository.getOne(user.getId());
 
